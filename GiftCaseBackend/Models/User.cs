@@ -15,7 +15,7 @@ namespace GiftCaseBackend.Models
     public class User : Friend
     {
         public string FacebookAccessToken { get; set; }
-        public List<User> Friends { get; set; }
+        public List<Friend> Friends { get; set; }
 
         public List<Gift> SentGifts { get; set; }
 

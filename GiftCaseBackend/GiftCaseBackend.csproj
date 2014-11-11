@@ -87,6 +87,7 @@
     <Compile Include="Models\BaaS.cs" />
     <Compile Include="Models\Gift.cs" />
     <Compile Include="Models\Notifications.cs" />
+    <Compile Include="Models\TestRepository.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -41,18 +41,25 @@ namespace GiftCaseBackend.Controllers
         /// <param name="deviceToken">A token identifying the device user is login in from</param>
         /// <returns>status message</returns>
         [HttpGet]
-        public string LoginFacebook(string userName, string accessToken, string deviceToken)
+        public User LoginFacebook(string userName, string accessToken, string deviceToken)
         {
             try
             {
                 var social = BaaS.SocialService.LinkUserFacebookAccount(userName, accessToken);
                 var push =  BaaS.PushNotificationService.StoreDeviceToken(userName, deviceToken, DeviceType.ANDROID);
 
-                return "ok";
+                return new User()
+                {
+                    UserName = userName, FacebookAccessToken = accessToken, 
+                    Friends = GetFacebookFriendList(userName).ToList(),
+                    Status = UserStatus.Registered,
+                    
+                };
             }
             catch (App42Exception ex)
             {
-                return SocialExceptionHandling(ex);
+                SocialExceptionHandling(ex);
+                return null;
             }
         }
         /// <summary>
@@ -92,6 +99,18 @@ namespace GiftCaseBackend.Controllers
                     },
                 };
             }
+        }
+
+        /// <summary>
+        /// Recommends some gifts
+        /// URL example:
+        /// http://localhost:22467/api/User/GetGiftRecommendation?friendUserName=ana
+        /// </summary>
+        /// <param name="friendUsername">Name of the friend to whom to recommend a gift for</param>
+        /// <returns>List of gift recommendations</returns>
+        public IEnumerable<Gift> GetGiftRecommendation(string friendUsername)
+        {
+            return TestRepository.Gifts.Take(3);
         }
 
         /// <summary>
