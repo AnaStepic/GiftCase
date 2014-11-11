@@ -5,11 +5,15 @@ using System.Web;
 
 namespace GiftCaseBackend.Models
 {
-    public class User
+    public class Friend
     {
         public string UserName { get; set; }
 
         public UserStatus Status { get; set; }
+    }
+
+    public class User : Friend
+    {
         public string FacebookAccessToken { get; set; }
         public List<User> Friends { get; set; }
 

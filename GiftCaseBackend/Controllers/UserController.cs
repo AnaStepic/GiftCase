@@ -62,7 +62,7 @@ namespace GiftCaseBackend.Controllers
         /// <param name="userName">Facebook userName of the user</param>
         /// <returns>list of friends as JSON or XML depending on which type the get call said it preferred</returns>
         [HttpGet]
-        public IEnumerable<User> GetFacebookFriendList(string userName)
+        public IEnumerable<Friend> GetFacebookFriendList(string userName)
         {
             try
             {
@@ -80,12 +80,12 @@ namespace GiftCaseBackend.Controllers
                 // for testing purposes
                 return new[]
                 {
-                    new User()
+                    new Friend()
                     {
                         UserName = "Ana Stepic",
                         Status = UserStatus.NonRegistered
                     },
-                    new User()
+                    new Friend()
                     {
                         UserName = "Damir Tomic",
                         Status = UserStatus.Registered
