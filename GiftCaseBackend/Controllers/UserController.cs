@@ -85,19 +85,7 @@ namespace GiftCaseBackend.Controllers
                 SocialExceptionHandling(ex);
 
                 // for testing purposes
-                return new[]
-                {
-                    new Friend()
-                    {
-                        UserName = "Ana Stepic",
-                        Status = UserStatus.NonRegistered
-                    },
-                    new Friend()
-                    {
-                        UserName = "Damir Tomic",
-                        Status = UserStatus.Registered
-                    },
-                };
+                return TestRepository.Friends;
             }
         }
 
@@ -111,6 +99,19 @@ namespace GiftCaseBackend.Controllers
         public IEnumerable<Gift> GetGiftRecommendation(string friendUsername)
         {
             return TestRepository.Gifts.Take(3);
+        }
+
+        /// <summary>
+        /// Recommends some gifts for a friend from specified gift category
+        /// URL example:
+        /// http://localhost:22467/api/User/GetGiftRecommendation?friendUserName=ana&category=Book
+        /// </summary>
+        /// <param name="friendUsername">Name of the friend to whom to recommend a gift for</param>
+        /// <param name="category">Category of gift</param>
+        /// <returns>List of gift recommendations</returns>
+        public IEnumerable<Gift> GetGiftRecommendation(string friendUsername, GiftCategory category)
+        {
+            return TestRepository.Gifts.Where(x=>x.Category==category);
         }
 
         /// <summary>

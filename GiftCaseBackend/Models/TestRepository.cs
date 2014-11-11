@@ -34,5 +34,19 @@ namespace GiftCaseBackend.Models
                 Store = Store.Amazon
             }
         };
+
+        public static List<Friend> Friends = new List<Friend>()
+        {
+            new Friend()
+            {
+                UserName = "Ana Stepic",
+                Status = UserStatus.NonRegistered
+            },
+            new Friend()
+            {
+                UserName = "Damir Tomic",
+                Status = UserStatus.Registered
+            }
+        }; 
     }
 }
