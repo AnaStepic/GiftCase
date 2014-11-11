@@ -8,6 +8,7 @@ using com.shephertz.app42.paas.sdk.csharp;
 using com.shephertz.app42.paas.sdk.csharp.storage;
 using com.shephertz.app42.paas.sdk.csharp.user;
 using GiftCaseBackend.Models;
+using Newtonsoft.Json;
 
 namespace GiftCaseBackend
 {
@@ -18,6 +19,12 @@ namespace GiftCaseBackend
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
+            // Makes enums serialize as strings instead of integer values
+            JsonSerializerSettings jsonSetting = new JsonSerializerSettings();
+            jsonSetting.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings = jsonSetting;
+
+            // initializes backend as a service provider
             BaaS.Initialize();
         }
     }
